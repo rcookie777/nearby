@@ -13,7 +13,6 @@ const userParticipation = new PersistentMap<string,string[]>('user Participation
 
 
 
-
 // View Methods
 // Does not change state of the blockchain 
 // Does not incur a fee

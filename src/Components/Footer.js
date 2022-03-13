@@ -26,7 +26,7 @@ const NavBar = (props) =>{
           <h5 className="title">Links</h5>
           <ul>
             <li className="list-unstyled">
-              <a href="#!">Link 1</a>
+              
             </li>
             <li className="list-unstyled">
               <a href="#!">Link 2</a>
