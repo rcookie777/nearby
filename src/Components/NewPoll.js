@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { Route } from "react-router";
 
 const NewPoll = (props) => {
   const candidateName1 = useRef();
@@ -75,7 +76,6 @@ const NewPoll = (props) => {
           <Form.Control ref={promptRef} placeholder='Add Prompt'></Form.Control>
         </Form.Group>
       </Form>
-
       <Button
         disabled={disableButton}
         onClick={sendToBlockChain}
