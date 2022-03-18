@@ -5,6 +5,8 @@ import { button, Grid, Modal, Typography } from '@mui/material'
 import { makeStyles, useTheme } from "@mui/styles"
 import { Theme } from '@mui/material/styles'
 import PollCard from "../Cards/PollCard";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import image from "../assets/wallpaper.png"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      backgroundImage: `url(${image})`,
   },
   title: {
       fontSize: 35,
@@ -28,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
       textTransform: "none",
       fontSize: 18,
       fontWeight: 600,
-  }
+  },
 }))
 
 const Home = (props) => {

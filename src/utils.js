@@ -34,6 +34,8 @@ export async function initContract() {
         "getVotes",
         "getUrl",
         "getCandidatePair",
+        "getContractPair",
+        "getAllContracts",
         ,
       ],
       // Change methods can modify the state. But you don't receive the returned value when called.
@@ -44,6 +46,8 @@ export async function initContract() {
         "addVote",
         "recordUser",
         "clearPromptArray",
+        "addToContractArray",
+        "addContractPair"
       ],
     }
   );

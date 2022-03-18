@@ -13,17 +13,29 @@ import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 
 // images
+import CssBaseline from "@material-ui/core/CssBaseline";
 import BlockVoteLogo from "./assets/nearby-logos_black.png";
+import back from "./assets/wallpaper.png"
 
 import getConfig from "./config";
 import { ThemeProvider } from '@mui/styles'
-import theme from './global/theme';
+import theme from './global/theme.js';
+
 const { networkId } = getConfig(process.env.NODE_ENV || "development");
 
 export default function App() {
   const changeCandidatesFunction = async (prompt) => {
     console.log(prompt);
     let namePair = await window.contract.getCandidatePair({ prompt: prompt });
+    localStorage.setItem("Candidate1", namePair[0]);
+    localStorage.setItem("Candidate2", namePair[1]);
+    localStorage.setItem("prompt", prompt);
+    window.location.replace(window.location.href + "PollingStation");
+  };
+  //CONTRACT PAGE CHANGE FUNC *ADD*
+  const changeContractsFunction = async (contract) => {
+    console.log(contract);
+    let namePair = await window.contract.getContractPair({ contract: contract });
     localStorage.setItem("Candidate1", namePair[0]);
     localStorage.setItem("Candidate2", namePair[1]);
     localStorage.setItem("prompt", prompt);

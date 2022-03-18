@@ -1,15 +1,17 @@
 
 
-import {  logging, PersistentMap} from 'near-sdk-as'
+import {Context,  logging, PersistentMap} from 'near-sdk-as'
 
 
 const CandidateURL=new PersistentMap<string,string>("CandidateURL");
 const CandidatePair=new PersistentMap<string,string[]>("Candidate Pair");
+
 const PromptArray= new PersistentMap<string,string[]>("array of prompts ");
 const VoteArray=new PersistentMap<string,i32[]>("stores votes ");
 const userParticipation = new PersistentMap<string,string[]>('user Participation Record')
 
-
+const ContractPair=new PersistentMap<string,string[]>("Contract Pair");
+const ContractArray= new PersistentMap<string,string[]>("array of prompts ");
 
 
 
@@ -67,10 +69,33 @@ export function getCandidatePair(prompt:string):string[]{
   }
 }
 
+export function getContractPair(contract:string):string[]{
+  if(ContractPair.contains(contract)){
+    return ContractPair.getSome(contract)
+  }else{
+    logging.log('prompt not found')
+    return []
+  }
+}
+
+export function getAllContracts():string[]{
+  if(ContractArray.contains('AllArrays')){
+    return ContractArray.getSome("AllArrays")
+  }else{
+    logging.log('no prompts found');
+    return []
+  }
+}
+
+
+
+
+
 // Change Methods 
 // Changes state of Blockchain 
 // Costs a transaction fee to do so 
 // Adds or modifies information to blockchain
+
 
 export function addUrl(name:string, url:string):void{
   CandidateURL.set(name,url);
@@ -79,6 +104,22 @@ export function addUrl(name:string, url:string):void{
 
 export function addCandidatePair(prompt:string,name1:string,name2:string):void{
   CandidatePair.set(prompt,[name1,name2])
+}
+
+export function addContractPair(contract:string,prompts:string[]):void{
+  ContractPair.set(contract,prompts)
+}
+
+export function addToContractArray(prompts:string):void{
+  logging.log('added to contract array')
+  if(ContractArray.contains("AllArrays")){
+    logging.log('add addition to contract array')
+    let tempArray=ContractArray.getSome("AllArrays")
+    tempArray.push(prompts)
+    ContractArray.set("AllArrays",tempArray);
+  }else{
+    ContractArray.set("AllArrays",[prompts])
+  }
 }
 
 export function addToPromptArray(prompt:string):void{
@@ -122,5 +163,4 @@ export function recordUser(prompt:string,user:string):void{
     userParticipation.set(prompt,[user]);
   }
 }
-
 

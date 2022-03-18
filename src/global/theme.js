@@ -1,8 +1,11 @@
 import { createTheme } from "@mui/material/styles/"
 import { red } from "@mui/material/colors";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 
 // Create a theme instance.
 const theme = createTheme({
+
     palette: {
         primary: {
             light: "#2CA3FA",
@@ -72,6 +75,7 @@ const theme = createTheme({
             xl: 1920,
         },
     },
+    
 });
 
 export default theme;
