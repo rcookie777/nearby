@@ -36,8 +36,10 @@ const NewPoll = (props) => {
 
     await window.contract.addToContractArray({
       contract: contractRef.current.value,
-      prompt: promptRef.current.value
+      prompt: promptRef.current.value,
     });
+
+    
 
 
 
