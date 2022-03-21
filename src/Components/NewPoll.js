@@ -10,6 +10,7 @@ const NewPoll = (props) => {
   const candidateName2URL = useRef();
 
   const promptRef = useRef();
+  const contractRef = useRef();
 
   const [disableButton, changeDisable] = useState(false);
 
@@ -32,6 +33,13 @@ const NewPoll = (props) => {
     });
 
     await window.contract.addToPromptArray({ prompt: promptRef.current.value });
+
+    await window.contract.addToContractArray({
+      contract: contractRef.current.value,
+      prompt: promptRef.current.value
+    });
+
+
 
     alert("head back to home page");
   };
@@ -74,6 +82,10 @@ const NewPoll = (props) => {
         <Form.Group className='mb-3'>
           <Form.Label>Prompt</Form.Label>
           <Form.Control ref={promptRef} placeholder='Add Prompt'></Form.Control>
+        </Form.Group>
+        <Form.Group className='mb-3'>
+          <Form.Label>Contract</Form.Label>
+          <Form.Control ref={contractRef} placeholder='Add Contract'></Form.Control>
         </Form.Group>
       </Form>
       <Button

@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { button, Grid, Modal, Typography } from '@mui/material'
 import { makeStyles, useTheme } from "@mui/styles"
 import { Theme } from '@mui/material/styles'
-import PollCard from "../Cards/PollCard";
+import ContractCard from "../Cards/ContractCard";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import image from "../assets/wallpaper.png"
+import { Placeholder } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      // backgroundImage: `url(${image})`,
   },
   title: {
       fontSize: 35,
@@ -33,29 +35,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Home = (props) => {
+const Poll = (props) => {
 
-  const [promptList, changePromptList] = useState([]);
+  const [contractList, changeContractList] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    const getPrompts = async () => {
-      changePromptList(await window.contract.getAllPrompts());
-      console.log(await window.contract.getAllPrompts());
+    const getContracts = async () => {
+      changeContractList(await window.contract.getAllContracts());
+      console.log(await window.contract.getAllContracts());
     };
-    getPrompts();
+    getContracts();
   }, []);
 
   return (
     <Grid className={classes.root} container direction="row" spacing={4}>
         <Grid item xs={12}>
         <Typography className={classes.title} variant="h2" align="center">
-            Voting Polls
+            Contracts
         </Typography>
         </Grid>
-        {promptList.map((el, index) => {
+        {contractList.map((el, index) => {
             return (
-              <PollCard key={index} index={index} el={el} changeCandidate={props.changeCandidates} />
+
+
+            <ContractCard key={index} index={index} el={el} changeContract={props.changeContract} />
+            //   <PollCard key={index} index={index} el={el} changeCandidate={props.changeCandidates} />
             //   <Grid className={classes.root} item sm={6} xs={12}>
             //       <Grid className={classes.card} container direction="column">
             //           {/* <div className={classes.imgContainer}>
@@ -77,4 +82,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default Poll;

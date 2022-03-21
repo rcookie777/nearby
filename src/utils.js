@@ -47,7 +47,7 @@ export async function initContract() {
         "recordUser",
         "clearPromptArray",
         "addToContractArray",
-        "addContractPair"
+        "addContractPair",
       ],
     }
   );

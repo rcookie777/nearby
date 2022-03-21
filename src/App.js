@@ -11,6 +11,7 @@ import NewPoll from "./Components/NewPoll";
 import PollingStation from "./Components/PollingStation";
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
+import Poll from "./Components/Poll";
 
 // images
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -30,16 +31,15 @@ export default function App() {
     localStorage.setItem("Candidate1", namePair[0]);
     localStorage.setItem("Candidate2", namePair[1]);
     localStorage.setItem("prompt", prompt);
-    window.location.replace(window.location.href + "PollingStation");
+    window.location.replace("http://localhost:1234/" + "PollingStation");
   };
   //CONTRACT PAGE CHANGE FUNC *ADD*
   const changeContractsFunction = async (contract) => {
     console.log(contract);
-    let namePair = await window.contract.getContractPair({ contract: contract });
-    localStorage.setItem("Candidate1", namePair[0]);
-    localStorage.setItem("Candidate2", namePair[1]);
-    localStorage.setItem("prompt", prompt);
-    window.location.replace(window.location.href + "PollingStation");
+    let promptPair = await window.contract.getContractPair({ contract: contract });
+    localStorage.setItem("contract", promptPair[0]);
+    localStorage.setItem("prompts", promptPair[1]);
+    window.location.replace(window.location.href + "Home");
   };
 
   return (
@@ -48,6 +48,9 @@ export default function App() {
       <NavBar/>
       <Switch>
         <Route exact path='/'>
+          <Poll changeContract={changeContractsFunction}/>
+        </Route>
+        <Route exact path='/Home'>
           <Home changeCandidates={changeCandidatesFunction} />
         </Route>
         <Route exact path='/PollingStation'>
